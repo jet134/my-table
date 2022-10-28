@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Table from './table/Table';
+import Page from './table/Page';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         </a>
       </header> */}
       
-      <Table />
+      <Page />
     </div>
   );
 }

@@ -1,51 +1,78 @@
 import React, {Component} from "react";
+import Template from "./Template";
 
-export default class extends Component {
+export default class Table extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: String,
-            age: Number
+            data: this.props.data
         }
+        // console.log(this);
     }
 
-    nameOnChangeHandler = (name) => {
+    deleteBtnHandler = (person, index) => {
+        // console.log(this.state.data);
+        // this.setState({
+        //     data: this.state.data.filter((_person, _index) => {
+        //         console.log(_person);
+        //         console.log(_index);
+        //         console.log(person);
+        //         // return _index !== index;
+        //         return _person !== person;
+        //     })
+        // })
+
+        this.state.data.splice(index, 1);
         this.setState({
-            ...this.state,
-            name: name
-        }, () => console.log(this.state));
-    }
-    
-    ageOnChangeHandler = (age) => {
-        this.setState({
-            ...this.state,
-            age: age
-        }, () => console.log(this.state));
+            data: this.state.data
+        })
     }
 
-    saveToTable = (name, age) => {
-        console.log("name = %s, age = %s", name, age);
+    personRender = (data) => {
+        // console.log(data);
+        return (
+            // <ul>
+            //     {data.map((obj) => <ol key={obj.person.id}>name: {obj.person.name}, age: {obj.person.age}, index = {obj.person.id}</ol>)}
+            // </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        {/* <th></th> */}
+                    </tr>
+                </thead>
+                <tbody>
+                    {/* {console.log(data)} */}
+                    {data.map((person, index) => 
+                        <tr key={index}>
+                            {/* <td>{console.log(person[index])}</td> */}
+                            <td>{person.name}</td>
+                            <td>{person.age}</td>
+                            <td>
+                                <button onClick={() => this.deleteBtnHandler(person, index)}>Del</button>
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+                
+            </table>
+            
+        );
     }
 
     render() {
-        const {name, age} = this.state;
-
+        const {data} = this.state;
+        // const test = [{person: {id: 0, name: "tom", age: 5}}, {person: {id: 1, name: "tom", age: 3}}];
+        const test = [{name: "tom", age: 5}, {name: "tom", age: 7}];
+        
         return (
             <div>
-                <label htmlFor="name">Name:</label>
-                <input id="name" defaultValue={name}
-                onChange={(e) => this.nameOnChangeHandler(e.target.value)}
-                />
-                <label htmlFor="age">Age:</label>
-                <input id="age" defaultValue={age}
-                onChange={(e) => this.ageOnChangeHandler(e.target.value)}
-                />
-                <div>
-                    <button onClick={() => this.saveToTable(name, age)}>Add</button>
-                </div>
-                
+                {this.personRender(data)}
+                {/* {this.personRender(test)} */}
+                {/* <Template /> */}
             </div>
-        )
+        );
     }
 }

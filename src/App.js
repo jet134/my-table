@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import Page from './table/Page';
+import Page from './table1/Page';
+import PeopleList from './table2/PeopleList.js';
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
         </a>
       </header> */}
       
-      <Page />
+      {/* <Page /> */}
+      <PeopleList />
     </div>
   );
 }
